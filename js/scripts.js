@@ -112,7 +112,7 @@
       entry.target.classList.toggle('fade-in', entry.isIntersecting);
       entry.target.classList.toggle('fade-out', !entry.isIntersecting);
     });
-  }, { threshold: 0.2 });
+  }, { threshold: 0.3 });
   
   sections.forEach(section => {
     observer.observe(document.querySelector(section));
