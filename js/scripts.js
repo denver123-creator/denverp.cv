@@ -142,3 +142,13 @@
 }());
 
 ////////////////////scroll and clicks fade in/fade out////////////////////////////////////
+
+const toP = document.querySelector('.navbar-brand');
+
+toP.addEventListener('click', e => {
+  e.preventDefault();
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  });
+});
