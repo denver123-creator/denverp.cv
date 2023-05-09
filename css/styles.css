@@ -125,6 +125,7 @@ my css code added here
 
 .modal-footer{
   margin-top: 5px;
+  align-self: center;
 }
 
 #modalBox {
