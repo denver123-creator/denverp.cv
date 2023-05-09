@@ -152,3 +152,25 @@ toP.addEventListener('click', e => {
     behavior: 'smooth'
   });
 });
+
+function checkCode() {
+  let input = document.getElementById("code").value;
+  let input1 = document.getElementById("code");
+  let button = document.querySelector("#modalBox .modal-footer button");
+  let errorMessage = document.getElementById("error-message");
+
+  let errorMessages = ["Please enter a valid code", "Please Enter the right code", "Incorrect code"];
+
+
+  if (input == "123") {
+    document.getElementById("page-top");
+    document.getElementById("modalBox").style.display = "none";
+  } else {
+
+    let randomIndex = Math.floor(Math.random() * errorMessages.length);
+    errorMessage.textContent = errorMessages[randomIndex];
+    input1.style.backgroundColor = "rgba(255, 0, 0, 0.5)";
+    input1.value = "";
+    button.classList.add("btn-danger");
+  }
+}
