@@ -135,7 +135,7 @@
     let button = document.querySelector("#modalBox .modal-footer button");
     let errorMessage = document.getElementById("error-message");
     let errorMessages = ["Please enter a valid code", "Please Enter the right code", "Incorrect code"];
-    if (input == 123) {
+    if (input == "abbylat" && "denver") {
       document.getElementById("page-top");
       document.getElementById("modalBox").style.display = "none";
     } else {
