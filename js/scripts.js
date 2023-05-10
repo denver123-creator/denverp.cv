@@ -162,7 +162,7 @@ function checkCode() {
   let errorMessages = ["Please enter a valid code", "Please Enter the right code", "Incorrect code"];
 
 
-  if (input == "123") {
+  if (input == 123) {
     document.getElementById("page-top");
     document.getElementById("modalBox").style.display = "none";
   } else {
