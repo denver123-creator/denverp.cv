@@ -129,6 +129,9 @@
     });
   });
   
+  const checkButton = document.querySelector('#check-button');
+  checkButton.addEventListener('click', checkCode);
+  
   function checkCode() {
     let input = document.getElementById("code").value;
     let input1 = document.getElementById("code");
