@@ -129,7 +129,6 @@
     });
   });
   
-  const checkButton = document.querySelector('#check-button');
   checkButton.addEventListener('click', checkCode);
   
   function checkCode() {
@@ -137,16 +136,75 @@
     let input1 = document.getElementById("code");
     let button = document.querySelector("#modalBox .modal-footer button");
     let errorMessage = document.getElementById("error-message");
-    let errorMessages = ["Please enter a valid code", "Please Enter the right code", "Incorrect code"];
-    if (input == "abbylat" || input == "abby") {
-      document.getElementById("page-top");
-      document.getElementById("modalBox").style.display = "none";
-    } else {
-      let randomIndex = Math.floor(Math.random() * errorMessages.length);
-      errorMessage.textContent = errorMessages[randomIndex];
+    
+    let errorMessages = ["Enter a valid code", "Enter the right code", "Incorrect code"];
+    let lockedOutMessage = "You are locked out for 5 minutes.";
+  
+    if (attemptsLeft === 0) {
+      errorMessage.textContent = lockedOutMessage;
+      input1.disabled = true;
+      button.disabled = true;
+  
+      setTimeout(() => {
+        input1.disabled = false;
+        button.disabled = false;
+        attemptsLeft = 3;
+        errorMessage.textContent = "";
+      }, 300000); // 5 minutes in milliseconds
+    } else if (input == "abbylat" || input == "abby") {
+      let dots = "";
       input1.style.backgroundColor = "rgba(255, 0, 0, 0.5)";
-      input1.value = "";
-      button.classList.add("btn-danger");
+      input1.disabled = true;
+      button.disabled = true;
+  
+      // Add a dot every second to the "Verifying the password..." text
+      let intervalId = setInterval(() => {
+        dots += ".";
+        errorMessage.textContent = "Verifying the password" + dots;
+      }, 1000);
+  
+      // Delay for 2 seconds before displaying success message
+      setTimeout(() => {
+        clearInterval(intervalId); // Stop adding dots
+        document.getElementById("page-top");
+        document.getElementById("modalBox").style.display = "none";
+      }, 3000);
+    } else {
+      let dots = "";
+      attemptsLeft--;
+      input1.style.backgroundColor = "rgba(255, 0, 0, 0.5)";
+      input1.disabled = true;
+      button.disabled = true;
+  
+      // Add a dot every second to the "Verifying the password..." text
+      let intervalId = setInterval(() => {
+        dots += ".";
+        errorMessage.textContent = "Verifying the password" + dots;
+      }, 1000);
+  
+      // Delay for 5 seconds before displaying error message
+      setTimeout(() => {
+        clearInterval(intervalId); // Stop adding dots
+        if (attemptsLeft === 0) {
+          errorMessage.textContent = lockedOutMessage;
+          input1.disabled = true;
+          button.disabled = true;
+    
+          setTimeout(() => {
+            input1.disabled = false;
+            button.disabled = false;
+            attemptsLeft = 3;
+            errorMessage.textContent = "";
+          }, 300000); // 5 minutes in milliseconds
+        } else {
+          errorMessage.textContent = errorMessages[Math.floor(Math.random() * errorMessages.length)] + " " + attemptsLeft + " remaining attempts";
+          input1.style.backgroundColor = "";
+          input1.disabled = false;
+          input1.value = "";
+          button.classList.remove("btn-danger");
+          button.disabled = false;
+        }
+      }, 5000);
     }
   }
 }());
