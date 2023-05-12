@@ -129,8 +129,7 @@
     });
   });
   
-  
-   const checkButton = document.querySelector('#check-button');
+  const checkButton = document.querySelector('#check-button');
   let attemptsLeft = 3;
   checkButton.addEventListener('click', checkCode);
 
@@ -187,7 +186,6 @@
       // Delay for 5 seconds before displaying success message
         setTimeout(() => {
         clearInterval(timerId); // Stop adding dots
-
         document.getElementById("page-top");
         document.getElementById("modalBox").style.display = "none";
         }, 5000);
