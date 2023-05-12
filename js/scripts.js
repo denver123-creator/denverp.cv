@@ -130,85 +130,90 @@
   });
   
   
-  const checkButton = document.querySelector('#check-button');
+   const checkButton = document.querySelector('#check-button');
   let attemptsLeft = 3;
   checkButton.addEventListener('click', checkCode);
-  
+
   function checkCode() {
     let input = document.getElementById("code").value;
     let input1 = document.getElementById("code");
     let button = document.querySelector("#modalBox .modal-footer button");
     let errorMessage = document.getElementById("error-message");
+    let errorMessages = ["Enter a valid code","Incorrect code"];
+    let lockedOutMessage = "You are locked out for";
+    let countDown = 120;
+    let timerId = dotTimer();
+
+    function ttT(){
+      let timerId;
+      let timerStarted = "";
+      
+      timerId = setInterval(() => {
+        let minutes = Math.floor(countDown / 60);
+        let seconds = countDown % 60;
+        errorMessage.textContent = lockedOutMessage + " " + `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        countDown--;
+        if (countDown < 0) {
+          clearInterval(timerId);
+          input1.disabled = false;
+          button.disabled = false;
+          input1.style.backgroundColor = "";
+          attemptsLeft = 3;
+          errorMessage.textContent = "";
+        }
+      }, 800);
     
-    let errorMessages = ["Enter a valid code", "Enter the right code", "Incorrect code"];
-    let lockedOutMessage = "You are locked out for 5 minutes.";
-  
-    if (attemptsLeft === 0) {
-      errorMessage.textContent = lockedOutMessage;
-      input1.disabled = true;
-      button.disabled = true;
-  
-      setTimeout(() => {
-        input1.disabled = false;
-        button.disabled = false;
-        attemptsLeft = 3;
-        errorMessage.textContent = "";
-      }, 300000); // 5 minutes in milliseconds
-    } else if (input == "abbylat" || input == "abby") {
+      timerStarted = "02:00";
+      return timerStarted;
+    }
+
+    function dotTimer() {
       let dots = "";
-      input1.style.backgroundColor = "rgba(255, 0, 0, 0.5)";
-      input1.disabled = true;
-      button.disabled = true;
-  
-      // Add a dot every second to the "Verifying the password..." text
       let intervalId = setInterval(() => {
         dots += ".";
-        errorMessage.textContent = "Verifying the password" + dots;
+        errorMessage.textContent = "Verifying the code" + dots;
       }, 1000);
-  
-      // Delay for 2 seconds before displaying success message
-      setTimeout(() => {
-        clearInterval(intervalId); // Stop adding dots
+      return intervalId;
+    }
+
+    if (attemptsLeft === 0) {
+      errorMessage.textContent = lockedOutMessage + " " + ttT();
+      } else if (input == "abbylat" || input == "abby") {
+    
+        input1.style.backgroundColor = "rgba(255, 0, 0, 0.5)";
+        input1.disabled = true;
+        button.disabled = true;
+        
+      // Delay for 5 seconds before displaying success message
+        setTimeout(() => {
+        clearInterval(timerId); // Stop adding dots
+
         document.getElementById("page-top");
         document.getElementById("modalBox").style.display = "none";
-      }, 3000);
-    } else {
-      let dots = "";
-      attemptsLeft--;
-      input1.style.backgroundColor = "rgba(255, 0, 0, 0.5)";
-      input1.disabled = true;
-      button.disabled = true;
-  
-      // Add a dot every second to the "Verifying the password..." text
-      let intervalId = setInterval(() => {
-        dots += ".";
-        errorMessage.textContent = "Verifying the password" + dots;
-      }, 1000);
-  
-      // Delay for 5 seconds before displaying error message
-      setTimeout(() => {
-        clearInterval(intervalId); // Stop adding dots
-        if (attemptsLeft === 0) {
-          errorMessage.textContent = lockedOutMessage;
-          input1.disabled = true;
-          button.disabled = true;
-    
-          setTimeout(() => {
-            input1.disabled = false;
-            button.disabled = false;
-            attemptsLeft = 3;
-            errorMessage.textContent = "";
-          }, 300000); // 5 minutes in milliseconds
+        }, 5000);
+      
         } else {
-          errorMessage.textContent = errorMessages[Math.floor(Math.random() * errorMessages.length)] + " " + attemptsLeft + " remaining attempts";
-          input1.style.backgroundColor = "";
-          input1.disabled = false;
-          input1.value = "";
-          button.classList.remove("btn-danger");
-          button.disabled = false;
-        }
-      }, 5000);
+        
+        attemptsLeft--;
+        input1.style.backgroundColor = "rgba(255, 0, 0, 0.5)";
+        input1.disabled = true;
+        button.disabled = true;
+    
+        setTimeout(() => {
+          clearInterval(timerId); // Stop adding dots
+
+          if (attemptsLeft === 0) {
+              errorMessage.textContent = lockedOutMessage + " " +  ttT();
+          } else {
+            errorMessage.textContent = errorMessages[Math.floor(Math.random() * errorMessages.length)] + " " + attemptsLeft + " remaining attempts";
+            input1.style.backgroundColor = "";
+            input1.disabled = false;
+            input1.value = "";
+            button.classList.remove("btn-danger");
+            button.disabled = false;
+          }
+        }, 5000);
+      }
     }
-  }
 }());
 ////////////////////modal events////////////////////////////////////
