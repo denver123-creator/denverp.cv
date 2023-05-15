@@ -187,6 +187,11 @@ my css code added here
   align-self: center;
 }
 
+.img-fluid2 {
+  max-width: 100%;
+  height: 50px;
+  width: 50px;
+}
 /*
 --------------------------------------------------------------
 */
