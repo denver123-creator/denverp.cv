@@ -161,11 +161,10 @@
           errorMessage.textContent = "";
         }
       }, 800);
-    
       timerStarted = "02:00";
       return timerStarted;
     }
-
+    
     function dotTimer() {
       let dots = "";
       let intervalId = setInterval(() => {
@@ -174,20 +173,16 @@
       }, 1000);
       return intervalId;
     }
-
+    
     if (attemptsLeft === 0) {
       errorMessage.textContent = lockedOutMessage + " " + ttT();
       } else if (input == "abbylat" || input == "abby") {
-    
         input1.style.backgroundColor = "rgba(255, 0, 0, 0.5)";
         input1.disabled = true;
         button.disabled = true;
-        
       // Delay for 5 seconds before displaying success message
         setTimeout(() => {
         clearInterval(timerId); // Stop adding dots
-
-        
         const modal = document.getElementById('modalBox');
         modal.classList.add('closing');
         // Wait for the animation to finish before hiding the modal
@@ -196,12 +191,10 @@
           }, 800); // 300ms = duration of the transition
           }, 5000);
         } else {
-        
         attemptsLeft--;
         input1.style.backgroundColor = "rgba(255, 0, 0, 0.5)";
         input1.disabled = true;
         button.disabled = true;
-    
         setTimeout(() => {
           clearInterval(timerId); // Stop adding dots
 
@@ -219,7 +212,7 @@
       }
     }
 }());
-////////////////////modal events////////////////////////////////////
+////////////////////disabling background clicks & scroll////////////////////////////////////
 
 (function(){
 
