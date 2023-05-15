@@ -189,7 +189,8 @@ my css code added here
 
 .img-fluid2 {
   max-width: 100%;
-  height: auto;
+  height: 50px;
+  width: 50px;
 }
 /*
 --------------------------------------------------------------
