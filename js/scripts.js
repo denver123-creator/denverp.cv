@@ -121,6 +121,10 @@
   'use strict';
   
   const toP = document.querySelector('.navbar-brand');
+  const checkButton = document.querySelector('#check-button');
+  let attemptsLeft = 3;
+  checkButton.addEventListener('click', checkCode);
+  
   toP.addEventListener('click', e => {
     e.preventDefault();
     window.scrollTo({
@@ -129,10 +133,6 @@
     });
   });
   
-  const checkButton = document.querySelector('#check-button');
-  let attemptsLeft = 3;
-  checkButton.addEventListener('click', checkCode);
-
   function checkCode() {
     let input = document.getElementById("code").value;
     let input1 = document.getElementById("code");
@@ -186,10 +186,15 @@
       // Delay for 5 seconds before displaying success message
         setTimeout(() => {
         clearInterval(timerId); // Stop adding dots
-        document.getElementById("page-top");
-        document.getElementById("modalBox").style.display = "none";
-        }, 5000);
-      
+
+        
+        const modal = document.getElementById('modalBox');
+        modal.classList.add('closing');
+        // Wait for the animation to finish before hiding the modal
+        setTimeout(() => {
+          modal.style.display = 'none';
+          }, 800); // 300ms = duration of the transition
+          }, 5000);
         } else {
         
         attemptsLeft--;
@@ -215,3 +220,32 @@
     }
 }());
 ////////////////////modal events////////////////////////////////////
+
+(function(){
+
+  'use strict';
+
+  // Create a MutationObserver to watch for changes to modalB's style attribute
+  const pagTT = document.getElementById("page-top");
+  const modalB = document.getElementById('modalBox');
+  
+  const observer = new MutationObserver(mutationsList => {
+    for (const mutation of mutationsList) {
+      if (mutation.attributeName === 'style') {
+        if (modalB.style.display === 'block') {
+          pagTT.style.pointerEvents = 'none';
+          pagTT.style.overflow = 'hidden';
+        } else {
+          pagTT.style.pointerEvents = 'auto';
+          pagTT.style.overflow = 'auto';
+        }
+      }
+    }
+  });
+  
+  // Start observing changes to modalB's style attribute
+  observer.observe(modalB, { attributes: true });
+
+}());
+
+
