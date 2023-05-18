@@ -97,33 +97,48 @@
     observer.observe(document.querySelector(section));
   });
 
+  const navLinks = document.querySelectorAll('.nav-link');
+
+  const activateNavLink = (sectionId) => {
+    navLinks.forEach(link => {
+      link.classList.remove('active');
+      if (link.getAttribute('href') === sectionId) {
+        link.classList.add('active');
+      }
+    });
+  };
+
   document.querySelectorAll('.nav-link').forEach(link => {
     link.addEventListener('click', e => {
       e.preventDefault();
       const targetSection = document.querySelector(link.getAttribute('href'));
-      targetSection.classList.add('fade-in'); //to fade in the section when the link is clicked.
+      targetSection.classList.add('fade-in'); // to fade in the section when the link is clicked.
       window.scrollTo({
         top: targetSection.offsetTop,
         behavior: 'smooth'
       });
 
       // Set the active class on the clicked navigation link
-      document.querySelectorAll('.nav-link').forEach(navLink => {
-        navLink.classList.remove('active');
-      });
-      link.classList.add('active');
+      activateNavLink(link.getAttribute('href'));
     });
   });
 
   const fadeInOnScroll = () => {
     document.querySelectorAll('.fade-in').forEach(section => {
-      section.classList.toggle('visible', section.getBoundingClientRect().top <= Math.max(document.documentElement.clientHeight, window.innerHeight) * 0.75);
+      const isSectionVisible = section.getBoundingClientRect().top <= Math.max(document.documentElement.clientHeight, window.innerHeight) * 0.75;
+      section.classList.toggle('visible', isSectionVisible);
+      if (isSectionVisible) {
+        section.classList.add('fade-in'); // to fade in the section when it becomes visible
+      } else {
+        section.classList.remove('fade-in'); // to remove fade in class if section is no longer visible
+      }
     });
-  }; 
+  };
 
   window.addEventListener('scroll', fadeInOnScroll);
   window.addEventListener('load', fadeInOnScroll);
 }());
+
 
 ////////////////////modal events////////////////////////////////////
 (function(){
