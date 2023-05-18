@@ -108,18 +108,18 @@ body {
 my css code added here
 */
 
-.fade-in {
-  opacity: 0;
-  transition: opacity 0.5s ease-in;
-}
-
-.fade-in.visible {
-  opacity: 1;
-}
-
 .resume-section {
   opacity: 0; /* initially hide section */
   transition: opacity 1s ease-in-out; /* add fade-in transition */
+}
+.resume-section.visible {
+  opacity: 1; /* set opacity to 1 when section is visible */
+}
+
+.nav-link.active {
+  background-color: antiquewhite;
+  transform: perspective(100px) rotateX(20deg);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
 .modal-footer{
@@ -191,12 +191,6 @@ my css code added here
   max-width: 100%;
   height: 50px;
   width: 50px;
-}
-
-.active {
-  background-color: antiquewhite;
-  transform: perspective(100px) rotateX(20deg);
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
 /*
