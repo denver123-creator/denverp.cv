@@ -3851,6 +3851,8 @@ textarea.form-control-lg {
   align-items: center;
   justify-content: space-between;
   padding: var(--bs-navbar-padding-y) var(--bs-navbar-padding-x);
+  box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+  border: 2px solid coral(37, 23, 18);
 }
 .navbar > .container,
 .navbar > .container-fluid,
