@@ -110,7 +110,7 @@ my css code added here
 
 .fade-in {
   opacity: 0;
-  transition: opacity 0.5s ease-in-out;
+  transition: opacity 0.5s ease-in;
 }
 
 .fade-in.visible {
