@@ -92,9 +92,11 @@
       entry.target.classList.toggle('fade-out', !entry.isIntersecting);
     });
   }, { threshold: 0.3 });
+
   sections.forEach(section => {
     observer.observe(document.querySelector(section));
   });
+
   document.querySelectorAll('.nav-link').forEach(link => {
     link.addEventListener('click', e => {
       e.preventDefault();
@@ -104,13 +106,21 @@
         top: targetSection.offsetTop,
         behavior: 'smooth'
       });
+
+      // Set the active class on the clicked navigation link
+      document.querySelectorAll('.nav-link').forEach(navLink => {
+        navLink.classList.remove('active');
+      });
+      link.classList.add('active');
     });
   });
+
   const fadeInOnScroll = () => {
     document.querySelectorAll('.fade-in').forEach(section => {
       section.classList.toggle('visible', section.getBoundingClientRect().top <= Math.max(document.documentElement.clientHeight, window.innerHeight) * 0.75);
     });
   }; 
+
   window.addEventListener('scroll', fadeInOnScroll);
   window.addEventListener('load', fadeInOnScroll);
 }());
