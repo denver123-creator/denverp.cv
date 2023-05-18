@@ -80,16 +80,27 @@
   });
 })();
 ////////////////////scroll and clicks fade in/fade out////////////////////////////////////
-(function(){
-
+(function() {
   'use strict';
 
   const sections = ['#experience', '#education', '#about', '#skills', '#interests', '#awards'];
+  const navLinks = document.querySelectorAll('.nav-link');
 
   const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
-      entry.target.classList.toggle('fade-in', entry.isIntersecting);
-      entry.target.classList.toggle('fade-out', !entry.isIntersecting);
+      const targetSectionId = '#' + entry.target.id;
+
+      if (entry.isIntersecting) {
+        navLinks.forEach(link => {
+          link.classList.remove('active');
+          if (link.getAttribute('href') === targetSectionId) {
+            link.classList.add('active');
+          }
+        });
+        entry.target.classList.add('visible');
+      } else {
+        entry.target.classList.remove('visible');
+      }
     });
   }, { threshold: 0.3 });
 
@@ -97,47 +108,33 @@
     observer.observe(document.querySelector(section));
   });
 
-  const navLinks = document.querySelectorAll('.nav-link');
+  const getVisibleSectionId = () => {
+    let visibleSectionId = '';
+    sections.forEach(section => {
+      const targetSection = document.querySelector(section);
+      const rect = targetSection.getBoundingClientRect();
 
-  const activateNavLink = (sectionId) => {
+      if (rect.top >= 0 && rect.top <= window.innerHeight * 0.5) {
+        visibleSectionId = section;
+      }
+    });
+    return visibleSectionId;
+  };
+
+  const activateVisibleNavLink = () => {
+    const visibleSectionId = getVisibleSectionId();
+
     navLinks.forEach(link => {
       link.classList.remove('active');
-      if (link.getAttribute('href') === sectionId) {
+      if (link.getAttribute('href') === visibleSectionId) {
         link.classList.add('active');
       }
     });
   };
 
-  document.querySelectorAll('.nav-link').forEach(link => {
-    link.addEventListener('click', e => {
-      e.preventDefault();
-      const targetSection = document.querySelector(link.getAttribute('href'));
-      targetSection.classList.add('fade-in'); // to fade in the section when the link is clicked.
-      window.scrollTo({
-        top: targetSection.offsetTop,
-        behavior: 'smooth'
-      });
-
-      // Set the active class on the clicked navigation link
-      activateNavLink(link.getAttribute('href'));
-    });
-  });
-
-  const fadeInOnScroll = () => {
-    document.querySelectorAll('.fade-in').forEach(section => {
-      const isSectionVisible = section.getBoundingClientRect().top <= Math.max(document.documentElement.clientHeight, window.innerHeight) * 0.75;
-      section.classList.toggle('visible', isSectionVisible);
-      if (isSectionVisible) {
-        section.classList.add('fade-in'); // to fade in the section when it becomes visible
-      } else {
-        section.classList.remove('fade-in'); // to remove fade in class if section is no longer visible
-      }
-    });
-  };
-
-  window.addEventListener('scroll', fadeInOnScroll);
-  window.addEventListener('load', fadeInOnScroll);
-}());
+  window.addEventListener('scroll', activateVisibleNavLink);
+  window.addEventListener('resize', activateVisibleNavLink);
+})();
 
 
 ////////////////////modal events////////////////////////////////////
