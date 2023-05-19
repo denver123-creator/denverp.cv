@@ -120,6 +120,7 @@ my css code added here
   background-color: antiquewhite;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
   border: 2px solid coral;
+  background-color: var(--bs-card-bg);
 }
 
 .modal-footer{
