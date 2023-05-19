@@ -118,7 +118,6 @@ my css code added here
 
 .nav-link.active {
   background-color: antiquewhite;
-  transform: perspective(800px) rotateX(30deg) rotateY(10deg) scale(1.2);
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
   border: 2px solid coral;
 }
