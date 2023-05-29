@@ -121,6 +121,7 @@ my css code added here
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
   border: 2px solid coral;
   background-color: var(--bs-card-bg);
+  border-radius: 50px;
 }
 
 .modal-footer{
