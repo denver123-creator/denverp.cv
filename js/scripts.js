@@ -82,6 +82,19 @@
 ////////////////////scroll and clicks fade in/fade out////////////////////////////////////
 (function() {
   'use strict';
+  
+   $('.navbar ul li a').click(function() {
+      var thisSection = $(this).attr('href');
+      var thisLink = $(this);
+  $('.navbar ul li a').removeClass('active');
+    $(thisLink).addClass("active");
+    $('.resume-section').removeClass("visible");
+    $(thisSection).addClass("visible");
+    $('.resume-section').removeClass("slide-in-text");
+    $(thisSection).addClass("slide-in-text");
+  //alert(thisSection);
+});
+
 
   const sections = ['#experience', '#education', '#about', '#skills', '#interests', '#awards'];
   const navLinks = document.querySelectorAll('.nav-link');
