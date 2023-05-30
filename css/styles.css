@@ -108,6 +108,21 @@ body {
 my css code added here
 */
 
+@keyframes slideIn {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.slide-in-text {
+  animation: slideIn 1s ease-in-out;
+}
+
+
+
 .resume-section {
   opacity: 0; /* initially hide section */
   transition: opacity 1s ease-in-out; /* add fade-in transition */
