@@ -84,8 +84,8 @@
   'use strict';
   
    $('.navbar ul li a').click(function() {
-      var thisSection = $(this).attr('href');
-      var thisLink = $(this);
+      let thisSection = $(this).attr('href');
+      let thisLink = $(this);
   $('.navbar ul li a').removeClass('active');
     $(thisLink).addClass("active");
     $('.resume-section').removeClass("visible");
