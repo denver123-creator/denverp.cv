@@ -121,8 +121,6 @@ my css code added here
   animation: slideIn 1s ease-in-out;
 }
 
-
-
 .resume-section {
   opacity: 0; /* initially hide section */
   transition: opacity 1s ease-in-out; /* add fade-in transition */
