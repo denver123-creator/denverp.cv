@@ -182,11 +182,15 @@ my css code added here
   width: 50%;
   border-radius: 9px;
   text-align: center;
-  background-image: url("https://st4.depositphotos.com/36518430/37758/v/450/depositphotos_377587530-stock-illustration-virus-background-coronavirus-ncov-covid.jpg");
+  background-image: url("https://entertainment.inquirer.net/files/2015/05/WILLIEREVILLAME.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   top: -50px;
 
+}
+
+#modalContent h2 {
+  color: blueviolet;
 }
 
 #error-message {
