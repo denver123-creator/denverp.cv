@@ -171,7 +171,6 @@ my css code added here
   background-color: black;
   background-position: center;
   background-size: cover;
-  filter: blur(200px);
 }
 
 #modalContent {
